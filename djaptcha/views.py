@@ -47,4 +47,4 @@ class CaptchaMixin:
         return f"{generate_url}?next={next_page}&refresh={refresh}"
 
     def get_captcha(self):
-        return Captcha.objects.get_captcha_or_none(self.request)
+        return Captcha.objects.get_captcha_or_generate(self.request)

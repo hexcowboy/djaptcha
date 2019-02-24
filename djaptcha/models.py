@@ -30,20 +30,6 @@ class CaptchaManager(models.Manager):
         captcha.generate(refresh=False)
         return captcha
 
-    def get_captcha_or_none(self, request):
-        """
-        Get the Captcha object corresponding to
-        given request only if it exists.
-        """
-        key = request.session.session_key
-
-        try:
-            captcha = Captcha.objects.get(pk=key)
-        except Captcha.DoesNotExist:
-            return False
-
-        return captcha
-
 
 class Captcha(models.Model):
     """
