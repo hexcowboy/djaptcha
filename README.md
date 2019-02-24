@@ -7,7 +7,7 @@ Djaptcha is a Django plugin that implements the `captcha` python package by `lep
 If you haven't already, `pip install captcha` and then use the following to install `djaptcha`:
 
 ```bash
-$ pip install djaptcha
+pip install djaptcha
 ```
 
 Now add `djaptcha` to the list of installed plugins in your Django app.
@@ -51,13 +51,15 @@ class MyView(CaptchaMixin, FormView):
     # View logic here
 ```
 
-2. Add the `CaptchaForm` to your Form class. *`CaptchaForm` should be on the far left to ensure the captcha is validated before any other data.*
+2. Add the `CaptchaForm` to your Form class. Inside this class is where you can add the `CaptchaField` and `CaptchaAnswerField` form fields to your form. *`CaptchaForm` should be on the far left to ensure the captcha is validated before any other data.*
 ```python
 from djaptcha.forms import CaptchaForm
+from djaptcha.fields import CaptchaField, CaptchaAnswerField
 
 class MyForm(CaptchaForm, Form)
     # Form fields and logic here.
-    pass
+    captcha = CaptchaField()
+    answer = CaptchaAnswerField()
 ```
 
 3. Djaptcha also provides some context variables to use in your views. You can use them like so in your form templates:
