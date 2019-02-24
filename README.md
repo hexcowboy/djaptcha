@@ -52,35 +52,15 @@ class MyView(CaptchaMixin, FormView):
     # View logic here
 ```
 
-<<<<<<< HEAD
 2. Add the `CaptchaForm` to your Form class. Inside this class is where you can add the `CaptchaField` and `CaptchaAnswerField` form fields to your form. *`CaptchaForm` should be on the far left to ensure the captcha is validated before any other data.*
-=======
-2. Add the `CaptchaForm` to your Form class. Now you can add a `CaptchaWidget` to your form just like you would any other widget. *`CaptchaForm` should be on the far left to ensure the captcha is validated before any other data.*
->>>>>>> 54d8db3f883041f85e501682503e2c3641a90fe1
 ```python
 from djaptcha.forms import CaptchaForm
 from djaptcha.fields import CaptchaField, CaptchaAnswerField
 
-<<<<<<< HEAD
 class MyForm(CaptchaForm, Form)
     # Form fields and logic here.
     captcha = CaptchaField()
     answer = CaptchaAnswerField()
-=======
-class MyForm(CaptchaForm, Form):
-    # Your form fields
-    captcha = forms.Field(
-        required=False, # Set required to false since it's just an image.
-        widget=CaptchaWidget,
-    )
-    answer = forms.CharField(
-        required=True,
-        max_length=settings.DJAPTCHA_LENGTH,
-        min_length=settings.DJAPTCHA_LENGTH,
-        widget=forms.TextInput()
-    )
-    # Your form logic
->>>>>>> 54d8db3f883041f85e501682503e2c3641a90fe1
 ```
 
 3. Djaptcha also provides some context variables to use in your views. You can use them like so in your form templates:
