@@ -20,7 +20,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-*__Note__: You must have sessions enabled and configured in your django app to use this plugin. You also must have configured a database. End users must have cookies enabled in their browser to be able to generate captcha images.*
+*__Note__: You must have sessions enabled and configured in your django app to use this plugin (by default they are enabled in Django). You also must have configured a database. End users must have cookies enabled in their browser to be able to generate captcha images.*
 
 Finally, run `python manage.py make_migrations` and `python manage.py migrate` to create the djaptcha database models.
 
@@ -32,6 +32,7 @@ It's recommended that you change the following settings to suit your specific pr
 DJAPTCHA_MAX_TRIES = 10 # Maximum amount of tries before user can't generate new captchas
 DJAPTCHA_LENGTH = 6 # Length of the captcha (example: 'F7W8MG' has a length of 6)
 DJAPTCHA_CHARACTERS = 'ABCEFGHJKLMNPRSTUVWXYZ' # Characters allowed in the captcha
+# The following two settings require you to set STATIC_URL and STATICFILES_DIRS in your settings.
 DJAPTCHA_URL = STATIC_URL + 'captcha/' # The URL that end users can access captcha images at
 DJAPTCHA_DIR = 'static/captcha/' # The local directory your captcha images should be stored in
 DJAPTCHA_EXPIRY = 5 # Length in minutes before the captcha and image are deleted
@@ -75,4 +76,16 @@ class MyForm(CaptchaForm, Form)
     <p>{{ captcha_retries }} retries left.</p>
     <button type="submit">Submit</button>
 </form>
+```
+
+4. Optional - Create a custom cookies template. When a user tries to view a form with a Captcha in it, they will be redirected to an error page (default: 'djaptcha/cookies.html').
+
+```python
+# settings.py
+DJAPTCHA_COOKIES_TEMPLATE = 'custom/cookies.html'
+```
+
+```html
+<!-- templates/custom/cookies.html -->
+<p>Please enable cookies! 🍪</p>
 ```
