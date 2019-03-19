@@ -57,7 +57,7 @@ class MyView(CaptchaMixin, FormView):
 from djaptcha.forms import CaptchaForm
 from djaptcha.fields import CaptchaField, CaptchaAnswerField
 
-class MyForm(CaptchaForm, Form)
+class MyForm(CaptchaForm, Form):
     # Form fields and logic here.
     captcha = CaptchaField()
     answer = CaptchaAnswerField()
